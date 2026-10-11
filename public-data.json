@@ -1,0 +1,108 @@
+{
+  "profile": {
+    "name": "임완철",
+    "affiliation": "경상국립대학교",
+    "role": "국가인공지능전략위원회 교육인재분과 위원",
+    "intro": "저서와 진행 중인 프로젝트를 한곳에 모아 소개합니다.",
+    "github_url": "https://github.com/climtc"
+  },
+  "records": [
+    {
+      "id": "project-concept-space",
+      "type": "project",
+      "title": "계산하는 개념 공간",
+      "year": "",
+      "status": "ongoing",
+      "summary": "",
+      "subtitle": "",
+      "publisher": "",
+      "isbn": "",
+      "url": "",
+      "repository_url": "",
+      "tags": []
+    },
+    {
+      "id": "project-multidimensional",
+      "type": "project",
+      "title": "다차원 시각화",
+      "year": "",
+      "status": "ongoing",
+      "summary": "",
+      "subtitle": "",
+      "publisher": "",
+      "isbn": "",
+      "url": "",
+      "repository_url": "",
+      "tags": []
+    },
+    {
+      "id": "book-thinking-things",
+      "type": "book",
+      "title": "생각하는 사물의 등장",
+      "year": "2017",
+      "status": "completed",
+      "summary": "인공지능과 연결된 사물들이 생각하는 시대, 다음 세대에게 무엇을 가르쳐야 하는지 묻는다. 도구와 상호작용하며 함께 변화하는 능력을 살핀다.",
+      "subtitle": "인공지능은 인간의 생각을 어떻게 바꾸는가",
+      "publisher": "지식노마드",
+      "isbn": "9791187481287",
+      "url": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=115494326",
+      "repository_url": "",
+      "tags": [
+        "인공지능",
+        "생각"
+      ]
+    },
+    {
+      "id": "book-future-reading",
+      "type": "book",
+      "title": "읽는다는 것의 미래",
+      "year": "2019",
+      "status": "completed",
+      "summary": "책을 생각의 물질적 기초이자 교육 장치로 살핀다. 책이 인공지능과 만날 때 읽기와 학습, 미래의 교육이 어떻게 달라지는지 묻는다.",
+      "subtitle": "책이 생각하게 되면 우리는 무엇을 읽어야 할까?",
+      "publisher": "지식노마드",
+      "isbn": "9791187481522",
+      "url": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=180050457",
+      "repository_url": "",
+      "tags": [
+        "읽기",
+        "교육"
+      ]
+    },
+    {
+      "id": "book-teaching-ai",
+      "type": "book",
+      "title": "가르치는 인공지능은 가능한가",
+      "year": "2020",
+      "status": "completed",
+      "summary": "‘가르치는 인공지능’이라는 질문에서 출발해 교육의 주체와 알고리듬, 데이터의 관계를 탐구한다. 교사와 학생, 여러 장치의 배치를 함께 생각하는 ‘장치의 교육학’을 제안한다.",
+      "subtitle": "‘장치의 교육학’을 위한 시론",
+      "publisher": "새물결",
+      "isbn": "9788955594270",
+      "url": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254298451",
+      "repository_url": "",
+      "tags": [
+        "인공지능",
+        "교육"
+      ]
+    },
+    {
+      "id": "book-algorithm-thought-paradox",
+      "type": "book",
+      "title": "알고리듬을 생각의 대상으로:알고리듬, 생각, 역설",
+      "year": "2026",
+      "status": "completed",
+      "summary": "알고리듬을 계산 절차를 넘어 우리의 시선과 생각을 구성하는 대상으로 탐구한다. 인간과 장치가 함께 생각하는 하이브리드 인지 시스템과 사유의 역설을 다룬다.",
+      "subtitle": "",
+      "publisher": "경상국립대학교출판부",
+      "isbn": "9788962574135",
+      "url": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=387518062",
+      "repository_url": "",
+      "tags": [
+        "알고리듬",
+        "생각",
+        "역설"
+      ]
+    }
+  ]
+}
