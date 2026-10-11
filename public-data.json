@@ -27,13 +27,18 @@
       "title": "기호의 차원 : 다차원 상호작용 기호편",
       "year": "",
       "status": "ongoing",
-      "summary": "",
+      "summary": "평면에 고정된 그림과 도식, 수학 공식이 압축한 관계와 조건을 조작 가능한 기호로 펼친다. 시점과 변수를 직접 바꾸며 인쇄된 표현에서 생략되기 쉬운 정보를 비교한다.",
       "subtitle": "",
       "publisher": "",
       "isbn": "",
-      "url": "",
-      "repository_url": "",
-      "tags": []
+      "url": "https://climtc.github.io/teaching-learning-perspectives/geometry-lab.html",
+      "repository_url": "https://github.com/climtc/teaching-learning-perspectives",
+      "tags": [
+        "차원증감법",
+        "상호작용",
+        "기호",
+        "시각화"
+      ]
     },
     {
       "id": "book-thinking-things",
