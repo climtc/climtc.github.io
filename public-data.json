@@ -10,16 +10,21 @@
     {
       "id": "project-concept-space",
       "type": "project",
-      "title": "계산하는 공간:개념편",
+      "title": "계산하는 공간 : 개념편",
       "year": "",
       "status": "ongoing",
-      "summary": "",
+      "summary": "공간을 담는 그릇, 관계, 계산으로 차례로 다시 읽고, 개념공간의 축이 어떻게 정해지며 언제 계산의 대상이 되는지를 묻는다. 2025년의 실험 ‘공교육 실뜨기’를 다시 읽으며 언어모델과 함께 생각할 때 무엇이 계산되고 무엇이 계산되지 않는지를 따진다.",
       "subtitle": "",
       "publisher": "",
       "isbn": "",
-      "url": "",
-      "repository_url": "",
-      "tags": []
+      "url": "https://climtc.github.io/computing-space-concepts/",
+      "repository_url": "https://github.com/climtc/computing-space-concepts",
+      "tags": [
+        "개념공간",
+        "계산하는 공간",
+        "언어모델",
+        "공교육 실뜨기"
+      ]
     },
     {
       "id": "project-multidimensional",
