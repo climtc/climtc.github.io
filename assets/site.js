@@ -1,5 +1,13 @@
 "use strict";
 (() => {
+  document.querySelectorAll('.book-cover img').forEach(image => {
+    const unavailable = () => {
+      image.closest('.book-cover').hidden = true;
+      image.closest('.book').classList.remove('has-cover');
+    };
+    image.addEventListener('error', unavailable, {once: true});
+    if (image.complete && image.naturalWidth === 0) unavailable();
+  });
   const search = document.getElementById("public-search");
   const items = [...document.querySelectorAll(".searchable")];
   const sections = [...document.querySelectorAll(".collection")];
