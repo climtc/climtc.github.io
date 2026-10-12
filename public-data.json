@@ -4,7 +4,10 @@
     "affiliation": "경상국립대학교",
     "role": "국가인공지능전략위원회 교육인재분과 위원",
     "intro": "생각과 배움의 조건을 이루는 장치, 기호, 알고리듬을 드러내고 함께 설계하는 연구를 합니다.",
-    "github_url": "https://github.com/climtc"
+    "github_url": "https://github.com/climtc",
+    "site_description": "이 사이트는 AI와 생각 사이의 관계를 다루는 연구 프로젝트의 재료입니다.\n\n이 사이트에 등록된 정보 중 사실(fact)은 사실이며, 의견과 아이디어, 관점 등은 수시로 변할 수 있습니다.\n\n이 사이트는 클로드, 코덱스, 재민이와 함께 만들고 있습니다.",
+    "site_start_date": "2026.09.xx",
+    "email": "climtc @ gnu.ac.kr"
   },
   "records": [
     {
