@@ -49,6 +49,25 @@
       ]
     },
     {
+      "id": "project-viewpoint",
+      "type": "project",
+      "title": "시선의 주인 : 관점",
+      "year": "2026",
+      "status": "ongoing",
+      "summary": "그림과 도식이 전제하는 눈의 자리와 관계 선택을 조작 가능한 모형으로 펼친다. 누가 어떤 조건에서 대상을 보고 표현하는지, 무엇이 보이고 무엇이 생략되는지 비교한다.",
+      "subtitle": "",
+      "publisher": "",
+      "isbn": "",
+      "url": "https://climtc.github.io/teaching-learning-perspectives/viewpoint-lab.html",
+      "repository_url": "https://github.com/climtc/teaching-learning-perspectives",
+      "tags": [
+        "시선",
+        "관점",
+        "원근법",
+        "상호작용 기호"
+      ]
+    },
+    {
       "id": "project-thought-tool",
       "type": "project",
       "title": "생각을 생각의 대상으로 다루는 도구",
