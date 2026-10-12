@@ -32,19 +32,42 @@
     {
       "id": "project-multidimensional",
       "type": "project",
-      "title": "기호의 차원 : 다차원 상호작용 기호편",
+      "title": "지식의 물질성 : 차원편",
       "year": "",
       "status": "ongoing",
-      "summary": "평면에 고정된 그림과 도식, 수학 공식이 압축한 관계와 조건을 조작 가능한 기호로 펼친다. 시점과 변수를 직접 바꾸며 인쇄된 표현에서 생략되기 쉬운 정보를 비교한다.",
+      "summary": "평면에 기록된 지식을 3차원 이상의 표현 형식과 나란히 살핀다. 입체의 관계와 단면, 투영과 고차원 데이터의 조작을 통해 표현이 드러내고 생략하는 조건을 비교한다.",
       "subtitle": "",
       "publisher": "",
       "isbn": "",
       "url": "https://climtc.github.io/teaching-learning-perspectives/geometry-lab.html",
       "repository_url": "https://github.com/climtc/teaching-learning-perspectives",
       "tags": [
+        "지식의 물질성",
         "차원증감법",
+        "고차원 표현",
         "상호작용",
         "기호",
+        "시각화"
+      ]
+    },
+    {
+      "id": "project-trans-signs",
+      "type": "project",
+      "title": "트랜스 기호 : 수학&물리학",
+      "year": "2026",
+      "status": "ongoing",
+      "summary": "수학의 공식과 물리 법칙을 조작 가능한 기호로 읽는다. 계산과 도식, 모형 사이를 오가며 변수와 초기 조건, 관측 방식이 결과에 미치는 영향을 비교한다.",
+      "subtitle": "",
+      "publisher": "",
+      "isbn": "",
+      "url": "https://climtc.github.io/teaching-learning-perspectives/trans-signs-lab.html",
+      "repository_url": "https://github.com/climtc/teaching-learning-perspectives",
+      "tags": [
+        "트랜스 기호",
+        "수학",
+        "물리학",
+        "공식",
+        "상호작용",
         "시각화"
       ]
     },
@@ -54,7 +77,7 @@
       "title": "시선의 주인 : 관점",
       "year": "2026",
       "status": "ongoing",
-      "summary": "종이책에 인쇄된 기호는 누구의 관점인가를 묻는다. 도식이 선택한 관계를 독자가 다시 구성하고, 눈의 위치와 분석의 질문이 바뀔 때 무엇이 보이고 생략되는지 비교한다.",
+      "summary": "종이책에 인쇄된 기호는 누구의 관점인가를 묻는다. 종이 뒤에 가정한 정사면체를 회전하고, 관점의 자리가 바뀔 때 삼각형에 남는 항이 달라지는 경험을 제공한다. 눈의 위치와 분석의 관점은 구별한다.",
       "subtitle": "",
       "publisher": "",
       "isbn": "",
@@ -613,7 +636,11 @@
           ],
           [
             "project-multidimensional",
-            "기호의 차원 : 다차원 상호작용 기호편"
+            "지식의 물질성 : 차원편"
+          ],
+          [
+            "project-trans-signs",
+            "트랜스 기호 : 수학&물리학"
           ]
         ]
       },
