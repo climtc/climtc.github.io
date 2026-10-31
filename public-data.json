@@ -13,15 +13,16 @@
     {
       "id": "project-concept-space",
       "type": "project",
-      "title": "계산하는 공간 : 개념편",
+      "title": "계산하는 공간",
       "year": "",
       "status": "ongoing",
-      "summary": "공간을 담는 그릇, 관계, 계산으로 차례로 다시 읽고, 개념공간의 축이 어떻게 정해지며 언제 계산의 대상이 되는지를 묻는다. 2025년의 실험 ‘공교육 실뜨기’를 다시 읽으며 언어모델과 함께 생각할 때 무엇이 계산되고 무엇이 계산되지 않는지를 따진다.",
+      "summary": "공간을 자리와 그릇, 관계, 계산으로 차례로 다시 읽고, 개념공간의 축이 어떻게 정해지며 언제 계산의 대상이 되는지를 묻는다. 2025년의 실험 ‘공교육 실뜨기’를 다시 읽으며 언어모델과 함께 생각할 때 무엇이 계산되고 무엇이 계산되지 않는지를 따진다.",
       "subtitle": "",
       "publisher": "",
       "isbn": "",
       "url": "https://climtc.github.io/computing-space-concepts/",
       "tags": [
+        "공간",
         "개념공간",
         "계산하는 공간",
         "언어모델",
@@ -103,6 +104,26 @@
         "경험 분석",
         "AI 사용 경험",
         "조건 비교"
+      ]
+    },
+    {
+      "id": "project-edu-ai-rmf",
+      "type": "project",
+      "title": "교육AI 위험관리 프레임워크 1.0",
+      "year": "2026",
+      "status": "ongoing",
+      "summary": "문헌·사례 분석과 교육 전문가가 선정한 위험 상황에 근거한 첫 공개판. 학교 현장의 운영 검증 전이다.",
+      "subtitle": "Education AI Risk Management Framework 1.0",
+      "publisher": "",
+      "isbn": "",
+      "url": "https://climtc.github.io/projects/education-ai-rmf.html",
+      "tags": [
+        "교육AI",
+        "위험관리",
+        "Risk Management Framework",
+        "RMF",
+        "교육적 위험",
+        "기술적 위험"
       ]
     },
     {
@@ -589,6 +610,10 @@
           [
             "book-algorithm-thought-paradox",
             "알고리듬을 생각의 대상으로"
+          ],
+          [
+            "project-edu-ai-rmf",
+            "교육AI 위험관리 프레임워크"
           ]
         ]
       }
@@ -627,7 +652,7 @@
           ],
           [
             "project-concept-space",
-            "계산하는 공간 : 개념편"
+            "계산하는 공간"
           ],
           [
             "project-multidimensional",
@@ -696,6 +721,10 @@
           [
             "paper-algorithm-publicness-2026",
             "알고리듬 공공성 연구"
+          ],
+          [
+            "project-edu-ai-rmf",
+            "교육AI 위험관리 프레임워크"
           ]
         ]
       }
