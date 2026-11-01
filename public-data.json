@@ -127,6 +127,26 @@
       ]
     },
     {
+      "id": "project-edu-ai-risk-detection",
+      "type": "project",
+      "title": "교육AI 위험 탐지 방법",
+      "year": "2026",
+      "status": "ongoing",
+      "summary": "교육 분야에 들어온 AI가 학습자와 교사, 교육 관계에 일으킬 수 있는 위험을 미리 찾아내고 진단하는 방법을 만든다. 위험관리 프레임워크, 위험 상황 사례와 현직 교사 검토, 위험 벤치마크를 하나의 순환으로 잇고, 기술이 정상 작동하는데도 생기는 교육적 위험을 중심 질문으로 둔다.",
+      "subtitle": "교육AI 위험관리 프레임워크·위험 상황 사례·교사 검토·위험 벤치마크의 순환",
+      "publisher": "",
+      "isbn": "",
+      "url": "https://climtc.github.io/projects/education-ai-risk-detection.html",
+      "tags": [
+        "교육AI",
+        "위험 탐지",
+        "위험 상황 사례",
+        "교사 검토",
+        "벤치마크",
+        "정상 작동 위험"
+      ]
+    },
+    {
       "id": "book-thinking-things",
       "type": "book",
       "title": "생각하는 사물의 등장",
@@ -202,8 +222,8 @@
     "author": "임완철",
     "url": "https://climtc.github.io/published-papers/",
     "repository_url": "https://github.com/climtc/published-papers",
-    "intro": "생각과 배움의 조건을 이루는 장치와 수업 경험, 알고리듬의 공공성을 탐구한 발표 연구를 읽습니다.",
-    "scope": "2020년 이후 발표한 논문과 기획글을 모았습니다. 각 글의 연구 방법과 문제의식, 원문을 읽을 수 있는 경로를 함께 안내합니다."
+    "intro": "AI와 생각, 교육의 관계와 알고리듬의 공공성을 탐구한 발표 연구를 읽습니다.",
+    "scope": "2020년 이후 발표한 AI 관련 논문과 기획글을 모았습니다. 각 글의 연구 방법과 문제의식, 원문을 읽을 수 있는 경로를 함께 안내합니다."
   },
   "papers": [
     {
@@ -246,49 +266,6 @@
       ],
       "slug": "edutech-2020",
       "url": "https://climtc.github.io/published-papers/papers/edutech-2020.html"
-    },
-    {
-      "id": "paper-science-inquiry-2022",
-      "year": "2022",
-      "month": "06",
-      "title": "The Suitability and Characteristics Analysis of Key Science Inquiry Activities in the 2015 National Science Curriculum in Korea",
-      "subtitle": "2015 과학과 교육과정 핵심 탐구활동의 적합성과 특성 분석",
-      "authors": [
-        "Mi Hyun Son",
-        "Wanchul Lim",
-        "Jeongwoo Son",
-        "Dae Hong Jeong"
-      ],
-      "journal": "Asia-Pacific Science Education",
-      "volume": "8",
-      "issue": "1",
-      "pages": "72–108",
-      "doi": "10.1163/23641177-bja10043",
-      "kind": "공동연구 논문",
-      "method": "교사 설문과 심층 면담",
-      "themes": [
-        "experience",
-        "institutions"
-      ],
-      "tags": [
-        "과학 탐구",
-        "과학교육",
-        "교육과정",
-        "탐구활동",
-        "교사 경험"
-      ],
-      "summary": "경험 많은 과학교사 8명의 설문과 면담을 통해 중학교 핵심 탐구활동을 실제 수업에서 수행할 때의 어려움을 검토한다. 탐구의 수준과 방법, 도구와 환경, 교사 지원을 함께 살펴 교육과정과 탐구활동의 개선 방향을 제안한다.",
-      "question": "교육과정에 제시된 탐구는 어떤 교실 조건에서 실제 배움의 경험이 되는가?",
-      "role": "장치와 교육과정의 조건을 교사의 수업 경험과 연결하는 실증 연구의 축이다.",
-      "metadata_url": "https://brill.com/view/journals/apse/8/1/article-p72_4.xml",
-      "original_url": "https://brill.com/view/journals/apse/8/1/article-p72_4.xml",
-      "original_label": "학술지에서 원문 읽기",
-      "access_note": "Brill 학술지 페이지에서 전체 본문을 웹으로 읽을 수 있다. Open Access.",
-      "related_books": [
-        "book-future-reading"
-      ],
-      "slug": "science-inquiry-2022",
-      "url": "https://climtc.github.io/published-papers/papers/science-inquiry-2022.html"
     },
     {
       "id": "paper-ai-education-2023",
@@ -541,7 +518,7 @@
   ],
   "narrative": {
     "intro": "생각과 배움의 조건을 이루는 장치, 기호, 알고리듬을 드러내고 함께 설계하는 연구를 합니다.",
-    "flow_intro": "새로운 기술과 만날 때 우리가 생각하고 배우는 방식은 어떻게 달라질까요? 책과 교실의 형식에서 시작한 질문은 교육과정과 수업 경험, 개인맞춤교육과 추천 알고리즘을 거쳐, 알고리듬을 공적으로 설명하고 함께 다루는 조건으로 이어집니다.",
+    "flow_intro": "새로운 기술과 만날 때 우리가 생각하고 배우는 방식은 어떻게 달라질까요? 책과 교실의 형식에서 시작한 질문은 디지털 수업 경험과 개인맞춤교육, 추천 알고리즘을 거쳐, 알고리듬을 공적으로 설명하고 함께 다루는 조건으로 이어집니다.",
     "flow_note": "아래는 발표 연구와 저서를 연결해 읽는 하나의 길입니다. 수업 경험을 검토하는 공동연구와 개념·정책을 탐구하는 연구는 서로를 보완하며 이어집니다.",
     "stages": [
       {
@@ -568,14 +545,10 @@
         ]
       },
       {
-        "period": "2022–2024",
+        "period": "2023–2024",
         "title": "교실에서 가능한 경험과 교육의 목적을 살피기",
-        "text": "과학 탐구활동과 비대면 수업의 경험을 검토합니다. 생성형 AI와 개인맞춤교육이 바꾸는 조건을 살피는 한편, 기술과 윤리를 연결하는 학습경험을 직접 설계하고 분석합니다.",
+        "text": "생성형 AI와 개인맞춤교육이 바꾸는 조건을 살피고, 비대면 수업의 경험을 검토합니다. 기술과 윤리를 연결하는 학습경험을 직접 설계하고 분석합니다.",
         "links": [
-          [
-            "paper-science-inquiry-2022",
-            "과학 탐구활동 연구"
-          ],
           [
             "paper-ai-education-2023",
             "AI 시대 교육 전망"
@@ -710,10 +683,6 @@
         "question": "교육AI의 규칙과 문서를 누가 해석하고 검증하며, 갱신과 수정의 책임을 질 것인가?",
         "text": "교육과정 문장이 수업과 평가, AI의 판단으로 옮겨질 때 필요한 해석과 근거를 살핍니다. 개인의 리터러시를 뒷받침할 기관의 지원, 이의제기와 수정의 절차, 교육의 인지적 기반에 대한 공적 책임을 탐구합니다.",
         "links": [
-          [
-            "paper-science-inquiry-2022",
-            "과학 탐구활동 연구"
-          ],
           [
             "paper-algorithm-literacy-2025",
             "추천 알고리즘과 리터러시"
