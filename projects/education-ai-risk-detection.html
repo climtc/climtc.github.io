@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>교육AI 위험 탐지 방법 · 임완철 연구 기록</title>
+<meta name="description" content="교육 분야에 들어온 AI가 학습자와 교사, 교육 관계에 일으킬 수 있는 위험을 미리 찾아내고 진단하는 방법을 만든다. 위험관리 프레임워크, 위험 상황 사례와 현직 교사 검토, 위험 벤치마크를 하나의 순환으로 잇는 진행 중 프로젝트.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%226%22%20fill%3D%22%231f5147%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2228%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2226%22%20fill%3D%22white%22%3E%EC%9E%84%3C%2Ftext%3E%3C%2Fsvg%3E">
+<style>
+/* 레이아웃: 한 줄 본문 기둥. 11단계 진행 줄(번호·상태 칩)과 도식으로 흐름을 먼저 보이고, 단계마다 과정·결과물·상태를 같은 틀에 담는다 */
+:root{
+  --bg:#f6f7f9; --paper:#ffffff; --ink:#1b2430; --muted:#5a6676; --line:#dde2e8;
+  --accent:#1f5f74; --accent-soft:#e3eef2; --agenda:#7a3e12; --agenda-soft:#f8ede2;
+  --done:#2f6b3d; --done-bg:#e4f1e6; --part:#8a5a00; --part-bg:#f7edd6; --wait:#1f5f74; --wait-bg:#e3eef2; --none:#6b6f78; --none-bg:#eceef1;
+  --seg1:#c9d3dc; --seg2:#dfe5ea; --seg3:#b4c1cc; --seg4:#d4dce3;
+  --f-body:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161c; --paper:#1a2028; --ink:#e3e8ee; --muted:#9aa6b4; --line:#2d3641;
+  --accent:#7fc0d4; --accent-soft:#1d313a; --agenda:#f0b787; --agenda-soft:#33261b;
+  --done:#8fd19e; --done-bg:#1d3324; --part:#e8c06a; --part-bg:#352b14; --wait:#7fc0d4; --wait-bg:#1d313a; --none:#a5abb5; --none-bg:#262c34;
+  --seg1:#3a4652; --seg2:#2e3842; --seg3:#46535f; --seg4:#34404b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161c; --paper:#1a2028; --ink:#e3e8ee; --muted:#9aa6b4; --line:#2d3641;
+  --accent:#7fc0d4; --accent-soft:#1d313a; --agenda:#f0b787; --agenda-soft:#33261b;
+  --done:#8fd19e; --done-bg:#1d3324; --part:#e8c06a; --part-bg:#352b14; --wait:#7fc0d4; --wait-bg:#1d313a; --none:#a5abb5; --none-bg:#262c34;
+  --seg1:#3a4652; --seg2:#2e3842; --seg3:#46535f; --seg4:#34404b; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--paper);padding:6px 10px;z-index:5}
+.skip:focus{left:16px}
+.topbar{border-bottom:1px solid var(--line);background:var(--paper)}
+.topbar .in{max-width:860px;margin:0 auto;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;font-size:.88rem}
+.topbar a{text-decoration:none;color:var(--ink)}
+.topbar a:hover{color:var(--accent);text-decoration:underline}
+.topbar .brand{font-weight:700}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{text-wrap:balance;line-height:1.35;margin:0}
+h1{font-size:2rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.lede{color:var(--muted);max-width:68ch}
+header.page{display:flex;flex-direction:column;gap:12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:16px}
+.agenda{background:var(--agenda-soft);border-left:4px solid var(--agenda);padding:20px 22px;display:flex;flex-direction:column;gap:12px;border-radius:2px}
+.agenda q{font-size:1.15rem;font-weight:600;color:var(--agenda);quotes:"“" "”"}
+.agenda ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.track{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.track li{display:grid;grid-template-columns:2.2rem 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+.track a{color:var(--ink);text-decoration:none}
+.track a:hover,.track a:focus-visible{color:var(--accent);text-decoration:underline}
+.num{font-family:var(--f-mono);font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.chip{font-size:.75rem;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.c-done{color:var(--done);background:var(--done-bg)}.c-part{color:var(--part);background:var(--part-bg)}.c-wait{color:var(--wait);background:var(--wait-bg)}.c-none{color:var(--none);background:var(--none-bg)}
+.stage{background:var(--paper);border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:14px}
+.stage-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline}
+.stage-head .num{font-size:1.05rem}
+.when{font-size:.82rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:7.5rem 1fr;gap:10px 16px;margin:0}
+.grid dt{font-size:.8rem;font-weight:600;color:var(--muted);letter-spacing:.03em;padding-top:2px}
+.grid dd{margin:0;min-width:0}
+.grid ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px}
+.ag{border-top:1px dashed var(--line);padding-top:12px;font-size:.93rem}
+.ag b{color:var(--agenda)}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:560px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:.8rem;color:var(--muted);background:var(--bg)}
+.note{font-size:.88rem;color:var(--muted)}
+ol.plain,ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+.fig{margin:0;background:var(--paper);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;color:var(--ink)}
+.fig-scroll{overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto}
+.fig svg.w-wide{min-width:720px}.fig svg.w-mid{min-width:540px}
+.fig figcaption{font-size:.86rem;color:var(--muted);max-width:72ch}
+.d-box{fill:var(--paper);stroke:currentColor;stroke-width:1.3}
+.d-now{stroke:var(--accent);stroke-width:2.6;fill:var(--accent-soft)}
+.d-todo{stroke:var(--muted);stroke-dasharray:5 4}
+.d-t{font-size:13px;font-weight:600;fill:currentColor;font-family:var(--f-body)}
+.d-s,.d-l{font-size:11.5px;fill:var(--muted);font-family:var(--f-body)}
+.d-strong{font-weight:600;fill:currentColor}
+.d-acc{fill:var(--accent);font-weight:600}
+.d-ag{fill:var(--agenda);font-weight:600}.d-ag2{fill:var(--muted)}
+.d-e{fill:none;stroke:currentColor;stroke-width:1.3}
+.d-e.todo{stroke:var(--muted);stroke-dasharray:5 4}
+.d-mk{fill:currentColor}.d-mkm{fill:var(--muted)}
+.d-dot{fill:currentColor}.d-dot-todo{fill:var(--paper);stroke:var(--muted);stroke-width:1.5}.d-dot-now{fill:var(--accent)}
+.seg-p2{fill:var(--agenda)}.seg-a{fill:var(--seg1)}.seg-b{fill:var(--seg2)}.seg-c{fill:var(--seg3)}.seg-d{fill:var(--seg4)}
+.fig rect[class^="seg"]{stroke:var(--paper);stroke-width:1.5}
+.d-seg{font-size:11.5px;fill:var(--ink);font-family:var(--f-body)}.d-seg-on{fill:var(--paper);font-weight:600}
+.related{display:flex;flex-direction:column;gap:10px}
+.related a{font-weight:600}
+footer.page{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.grid dt{padding-top:6px}.stage{padding:18px}h1{font-size:1.6rem}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style></head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<div class="topbar"><div class="in"><a class="brand" href="../index.html">임완철 연구 기록</a><a href="../index.html#projects">프로젝트 목록</a></div></div>
+<main class="wrap" id="main">
+
+<header class="page">
+  <span class="eyebrow">진행 중 프로젝트 · 2026</span>
+  <h1>교육AI 위험 탐지 방법</h1>
+  <p class="lede">교육 분야에 들어온 AI가 학습자와 교사, 교육 관계에 일으킬 수 있는 위험을 미리 찾아내고 진단하는 방법을 만든다. 위험관리 프레임워크, 위험 상황 사례와 현직 교사의 검토, 위험 벤치마크를 하나의 순환으로 잇는다. 이 페이지는 지금까지의 과정과 중간 결과, 현재 상태와 이후 계획을 열한 단계로 정리한 것이다.</p>
+  <div class="meta"><span>연구 책임 임완철(경상국립대학교, 국가인공지능전략위원회 교육인재분과 위원)</span><span>시작 2026년 10월</span><span>기준일 2026-11-01</span></div>
+</header>
+
+<section aria-labelledby="agenda-h">
+  <h2 id="agenda-h">중심 질문</h2>
+  <div class="agenda">
+    <q>기술이 완전히 정상적으로 동작하더라도, 혹은 정상 동작하는 과정에서 발생하는 교육 측면의 위험을 어떻게 사유·연구·정책·기술설계의 대상으로 다룰 수 있는가</q>
+    <p>이 질문은 연구의 출발부터 위험 분류의 원칙으로 들어가 있다. 교육 측 위험(ED)과 기술 측 위험(TE)을 원인이 아니라 위해가 놓이는 자리로 나누고, 두 축을 서로 독립된 축으로 둔다. 기술적으로 정상 작동하는 시스템도 교육 측 위해를 낳을 수 있기 때문이다. 이 질문은 연구 안에서 세 가지 형태로 다룬다.</p>
+    <ul>
+      <li><b>P2 경로</b>: 기술은 정상 작동하는데 교육이 해를 입는 경로. 일반 AI 위험관리 체계가 놓치기 쉬운 경로이며, 이 연구의 핵심 검증 대상이다.</li>
+      <li><b>의도대로 작동하는 설계</b>: 관계·몰입 설계, 아첨, 정서적 의존처럼 설계 목표가 그대로 구현될 때 생기는 위해.</li>
+      <li><b>교육적 효능의 미입증과 목적 일탈</b>: 오류가 없어도 교육 목적에 이바지한다는 근거가 없는 상태.</li>
+    </ul>
+    <p>지금까지의 근거는 이 질문이 가장 덜 채워진 자리임을 보여 준다. 관찰 사례 168건 중 P2는 17건(10%)이고, 프레임워크 공개판의 위험 상황 사례 135개 중 21개(16%), 교사 검토 대상 67개 중 10개이다. P2는 사고 보고 체계에 거의 잡히지 않고 주로 연구(무작위 배정 실험 등)로만 확인된다. 이후 계획의 무게를 이 공백에 둔다.</p>
+  </div>
+  <figure class="fig" id="fig-p2"><div class="fig-scroll"><svg viewBox="0 0 710 200" class="w-mid" role="img" aria-label="주된 위험 경로 분포에서 P2는 관찰 사례 168건 중 17건(10%), 공개판 사례 135개 중 21개(16%), 교사 검토 대상 67개 중 10개(15%)로 세 자료 모두에서 작은 몫이다."><text x="0" y="37" text-anchor="start" class="d-t">관찰 사례 168건</text><text x="0" y="57.0" text-anchor="start" class="d-l d-ag">P2 17 (10%)</text><rect x="180.0" y="24" width="52.6" height="30" class="seg-p2"><title>P2 17</title></rect><text x="206.3" y="44" text-anchor="middle" class="d-seg d-seg-on">P2 17</text><rect x="232.6" y="24" width="77.4" height="30" class="seg-a"><title>P1 25</title></rect><text x="271.3" y="44" text-anchor="middle" class="d-seg">P1 25</text><rect x="310.0" y="24" width="55.7" height="30" class="seg-b"><title>P3 18</title></rect><text x="337.9" y="44" text-anchor="middle" class="d-seg">P3 18</text><rect x="365.7" y="24" width="139.3" height="30" class="seg-c"><title>P4 45</title></rect><text x="435.4" y="44" text-anchor="middle" class="d-seg">P4 45</text><rect x="505.0" y="24" width="195.0" height="30" class="seg-d"><title>P5 63</title></rect><text x="602.5" y="44" text-anchor="middle" class="d-seg">P5 63</text><text x="0" y="99" text-anchor="start" class="d-t">공개판 사례 135개</text><text x="0" y="119.0" text-anchor="start" class="d-l d-ag">P2 21 (16%)</text><rect x="180.0" y="86" width="80.9" height="30" class="seg-p2"><title>P2 21</title></rect><text x="220.4" y="106" text-anchor="middle" class="d-seg d-seg-on">P2 21</text><rect x="260.9" y="86" width="315.9" height="30" class="seg-a"><title>P1 82</title></rect><text x="418.8" y="106" text-anchor="middle" class="d-seg">P1 82</text><rect x="576.7" y="86" width="15.4" height="30" class="seg-b"><title>P3 4</title></rect><rect x="592.1" y="86" width="92.4" height="30" class="seg-c"><title>P4 24</title></rect><text x="638.4" y="106" text-anchor="middle" class="d-seg">P4 24</text><rect x="684.6" y="86" width="15.4" height="30" class="seg-d"><title>P5 4</title></rect><text x="0" y="161" text-anchor="start" class="d-t">교사 검토 대상 67개</text><text x="0" y="181.0" text-anchor="start" class="d-l d-ag">P2 10 (15%)</text><rect x="180.0" y="148" width="77.6" height="30" class="seg-p2"><title>P2 10</title></rect><text x="218.8" y="168" text-anchor="middle" class="d-seg d-seg-on">P2 10</text><rect x="257.6" y="148" width="194.0" height="30" class="seg-a"><title>P1 25</title></rect><text x="354.6" y="168" text-anchor="middle" class="d-seg">P1 25</text><rect x="451.6" y="148" width="31.0" height="30" class="seg-b"><title>P3 4</title></rect><rect x="482.7" y="148" width="186.3" height="30" class="seg-c"><title>P4 24</title></rect><text x="575.8" y="168" text-anchor="middle" class="d-seg">P4 24</text><rect x="669.0" y="148" width="31.0" height="30" class="seg-d"><title>P5 4</title></rect></svg></div><figcaption>그림 1. 세 자료의 주된 위험 경로 분포. 중심 아젠다에 해당하는 P2(진한 칸)는 어느 자료에서도 6분의 1을 넘지 않는다. 관찰 사례에서는 의도적 오용(P5)이, 공개판 사례에서는 기술 결함(P1)이 가장 크다. 칸은 왼쪽부터 P2 기술 정상 작동 → 교육 위해, P1 기술 결함, P3 교육 맥락의 증폭, P4 관리 실패, P5 의도적 오용이며, 좁은 칸(P3·P5 각 4)은 숫자를 생략했다.</figcaption></figure>
+</section>
+
+<section aria-labelledby="track-h">
+  <h2 id="track-h">열한 단계 한눈에 보기</h2>
+  <ol class="track">
+    <li><span class="num">1</span><a href="#s1">문제 인식: 교육의 특수성이 빠진 규제와 지침</a><span class="chip c-done">정리 완료</span></li>
+    <li><span class="num">2</span><a href="#s2">국제기구와 연구 주체의 문헌·사례 분석</a><span class="chip c-done">1차 완료</span></li>
+    <li><span class="num">3</span><a href="#s3">교육AI 위험관리 프레임워크 고안</a><span class="chip c-done">1.0·1.1 공개</span></li>
+    <li><span class="num">4</span><a href="#s4">프레임워크와 독립적인 위험 상황 사례 개발과 1차 검토</a><span class="chip c-done">개발·1차 검토 완료</span></li>
+    <li><span class="num">5</span><a href="#s5">사례를 프레임워크에 적용해 양쪽 개선</a><span class="chip c-done">1회 완료</span></li>
+    <li><span class="num">6</span><a href="#s6">프레임워크 틀로 사례 종합 → 현직 교사 검토</a><span class="chip c-wait">준비 완료</span></li>
+    <li><span class="num">7</span><a href="#s7">교사 검토 결과로 사례와 프레임워크 개선</a><span class="chip c-wait">분석 계획 확정</span></li>
+    <li><span class="num">8</span><a href="#s8">교육AI 위험 벤치마크 개발</a><span class="chip c-none">자원 준비·통합 전</span></li>
+    <li><span class="num">9</span><a href="#s9">벤치마크로 교육AI 진단</a><span class="chip c-none">시작 전</span></li>
+    <li><span class="num">10</span><a href="#s10">전체 사이클과 작은 사이클의 반복</a><span class="chip c-part">작은 사이클 운용 중</span></li>
+    <li><span class="num">11</span><a href="#s11">목표 결과물</a><span class="chip c-part">1개 공개·2개 진행</span></li>
+  </ol>
+  <figure class="fig" id="fig-flow"><div class="fig-scroll"><svg viewBox="0 0 980 410" class="w-wide" role="img" aria-label="문헌과 사례 분석이 교육AI RMF를 만들고, 독립 연구가 만든 위험 상황 사례와 RMF가 서로를 개선한 뒤 교사 검토로 이어진다. 교사 검토 결과는 다음 판의 RMF와 사례로 돌아가고 벤치마크와 진단은 아직 시작하지 않았다."><defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-mk"/></marker><marker id="am1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-mkm"/></marker></defs><rect x="20" y="60" width="140" height="56" rx="4" class="d-box d-done"/><text x="90.0" y="83" text-anchor="middle" class="d-t">1 문제 인식</text><text x="90.0" y="101" text-anchor="middle" class="d-s">규제·지침의 교육 공백</text><rect x="190" y="60" width="140" height="56" rx="4" class="d-box d-done"/><text x="260.0" y="83" text-anchor="middle" class="d-t">2 문헌·사례 분석</text><text x="260.0" y="101" text-anchor="middle" class="d-s">조항 1,021 · 사례 237</text><rect x="380" y="60" width="140" height="56" rx="4" class="d-box d-done"/><text x="450.0" y="83" text-anchor="middle" class="d-t">3 교육AI RMF</text><text x="450.0" y="101" text-anchor="middle" class="d-s">공개판 1.1</text><rect x="190" y="284" width="140" height="56" rx="4" class="d-box d-done"/><text x="260.0" y="307" text-anchor="middle" class="d-t">별도 사례 연구</text><text x="260.0" y="325" text-anchor="middle" class="d-s">발달 위험 · 현장 진단</text><rect x="380" y="284" width="140" height="56" rx="4" class="d-box d-done"/><text x="450.0" y="307" text-anchor="middle" class="d-t">4 위험 상황 사례</text><text x="450.0" y="325" text-anchor="middle" class="d-s">1차 검토: 연구자</text><rect x="570" y="172" width="140" height="56" rx="4" class="d-box d-now"/><text x="640.0" y="195" text-anchor="middle" class="d-t">6 교사 검토</text><text x="640.0" y="213" text-anchor="middle" class="d-s">67사례 · 두 방식</text><rect x="760" y="172" width="140" height="56" rx="4" class="d-box d-todo"/><text x="830.0" y="195" text-anchor="middle" class="d-t">7 사례·RMF 개선</text><text x="830.0" y="213" text-anchor="middle" class="d-s">분석 계획 확정</text><rect x="570" y="284" width="140" height="56" rx="4" class="d-box d-todo"/><text x="640.0" y="307" text-anchor="middle" class="d-t">8 벤치마크</text><text x="640.0" y="325" text-anchor="middle" class="d-s">자원 통합 전</text><rect x="760" y="284" width="140" height="56" rx="4" class="d-box d-todo"/><text x="830.0" y="307" text-anchor="middle" class="d-t">9 진단</text><text x="830.0" y="325" text-anchor="middle" class="d-s">미착수</text><path d="M160,88 L188,88" class="d-e" marker-end="url(#ah1)"/><path d="M330,88 L378,88" class="d-e" marker-end="url(#ah1)"/><text x="354" y="80" text-anchor="middle" class="d-l">근거</text><path d="M330,312 L378,312" class="d-e" marker-end="url(#ah1)"/><text x="354" y="304" text-anchor="middle" class="d-l">사례</text><path d="M450,118 L450,282" class="d-e" marker-start="url(#ah1)" marker-end="url(#ah1)"/><text x="460" y="194" text-anchor="start" class="d-l d-strong">5 적용·양방향 개선</text><text x="460" y="214" text-anchor="start" class="d-l">판정 105 · 제안 22</text><path d="M520,100 L545,100 L545,190 L568,190" class="d-e" marker-end="url(#ah1)"/><text x="538" y="150" text-anchor="end" class="d-l">틀로 종합</text><path d="M500,284 L500,214 L568,214" class="d-e" marker-end="url(#ah1)"/><text x="506" y="248" text-anchor="start" class="d-l">검토 67</text><path d="M710,200 L758,200" class="d-e todo" marker-end="url(#am1)"/><text x="734" y="192" text-anchor="middle" class="d-l">평정</text><path d="M520,326 L568,326" class="d-e todo" marker-end="url(#am1)"/><text x="544" y="318" text-anchor="middle" class="d-l">문항화</text><path d="M710,312 L758,312" class="d-e todo" marker-end="url(#am1)"/><text x="734" y="304" text-anchor="middle" class="d-l">적용</text><path d="M830,284 L830,230" class="d-e todo" marker-end="url(#am1)"/><text x="838" y="262" text-anchor="start" class="d-l">진단 결과</text><path d="M830,172 L830,30 L450,30 L450,58" class="d-e todo" marker-end="url(#am1)"/><text x="640" y="23" text-anchor="middle" class="d-l">다음 판 RMF 개정</text><path d="M900,200 L944,200 L944,372 L450,372 L450,342" class="d-e todo" marker-end="url(#am1)"/><text x="700" y="365" text-anchor="middle" class="d-l">사례 수정</text><text x="640" y="163" text-anchor="middle" class="d-l d-acc">현재 단계</text><line x1="20" y1="392" x2="48" y2="392" class="d-e"/><text x="54" y="396" text-anchor="start" class="d-l">진행함</text><line x1="110" y1="392" x2="138" y2="392" class="d-e todo"/><text x="144" y="396" text-anchor="start" class="d-l">아직 안 함</text><rect x="220" y="384" width="22" height="16" rx="3" class="d-box d-now"/><text x="248" y="396" text-anchor="start" class="d-l">현재 위치</text></svg></div><figcaption>그림 2. 열한 단계의 실제 흐름. RMF(3)와 위험 상황 사례(4)는 따로 만들어져 5단계에서 서로를 고쳤다. 교사 검토(6)는 둘을 함께 받는다. 실선은 진행한 연결이고, 점선은 앞으로 닫을 연결이다. 교사 검토가 시작되어야 다음 판으로 돌아가는 고리가 처음 닫힌다.</figcaption></figure>
+</section>
+
+<section aria-labelledby="stages-h">
+  <h2 id="stages-h">단계별 정리</h2>
+
+  <article class="stage" id="s1">
+    <div class="stage-head"><span class="num">1</span><h3>문제 인식: 교육의 특수성이 빠진 규제와 지침</h3><span class="chip c-done">정리 완료</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>미국 NIST의 AI 위험관리 프레임워크(AI RMF)를 출발 문헌으로 삼아, 주요 규제와 지침이 교육 맥락을 어떻게 다루는지 대조했다.</dd>
+      <dt>확인한 것</dt>
+      <dd><ul>
+        <li>NIST AI RMF 1.0과 생성형 AI 프로파일(NIST AI 600-1)에는 교육 프로파일이 없다. 1.0은 개정이 예고되었으나 공개된 초안은 없다.</li>
+        <li>EU AI법은 교육을 고위험 영역(부속서 III 3항)으로 두지만, 고위험 의무 적용이 2027년 12월 2일로 연기되었다(Regulation (EU) 2026/1744).</li>
+        <li>인공지능기본법은 고영향 인공지능 가운데 교육 영역으로 유아·초·중등 학생 평가만 명시한다(제2조제4호차목).</li>
+        <li>영국 교육부의 2026년 1월 개정 지침은 교육 측 위험을 제품 요건으로 만든 드문 선례이다.</li>
+        <li>1차로 분석한 문헌 조항 708개 중 112개(16%)가 NIST 하위범주에 대응하지 않았고, 대부분이 교육 측 조항이었다. 보호자의 역할을 정한 조항은 11개뿐이었다.</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>문제 진술의 근거를 확보했다. 법령과 지침은 정기 갱신 점검으로 최신성을 유지한다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> 기존 체계는 주로 기술의 결함, 오용, 관리 실패를 다룬다. 기술이 정상인데 교육이 해를 입는 경로를 따로 다루는 체계는 찾지 못했다.</p>
+  </article>
+
+  <article class="stage" id="s2">
+    <div class="stage-head"><span class="num">2</span><h3>국제기구와 연구 주체의 문헌·사례 분석</h3><span class="chip c-done">1차 완료</span><span class="when">2026년 10월</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>기준 문헌의 판본을 고정하고, 국제기구·국가·학술 문헌을 등록한 뒤 조항 단위로 코딩했다. 모든 인용은 원문의 해당 구간과 대조해 검증했다. 위험 사례는 1차 기록을 다시 확인하며 사례 데이터베이스로 만들었다.</dd>
+      <dt>중간 결과</dt>
+      <dd><ul>
+        <li>문헌 67건, 조항 1,021개(35개 문헌, 원문 구간 검증)</li>
+        <li>후속 근거 탐색에서 문헌 19건과 조항 200개를 추가</li>
+        <li>사례 237건: 관찰 사례 180건(통계 대상 168건)과 합성 장면 57건. 2024~2026년 사례가 80%</li>
+        <li>사례 35건(20.8%) 독립 코딩: 경로 κ .80, 증거 수준 κ .93</li>
+      </ul></dd>
+      <dt>주요 발견</dt>
+      <dd><ul>
+        <li>주된 경로는 의도적 오용(P5) 63건(38%), 관리 실패(P4) 45건, 기술 결함(P1) 25건, 미성년 맥락(P3) 18건, 기술 정상·교육 위해(P2) 17건이다.</li>
+        <li>사례의 약 40%가 학교가 조달하지 않은 AI에서 나왔다.</li>
+        <li>조치 결과까지 확인되는 사례는 8%이다.</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>일부 원문은 아직 확보하지 못했다. 독립 코딩은 AI 에이전트 코더 사이에서 이루어졌고, 사람 코더 검증은 아직 없다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> P2는 사고 보고에서 거의 보이지 않는다. 예를 들어 AI 보조를 받은 집단이 과제는 더 잘 수행하지만 AI 없이 치른 시험에서는 학습 손실을 보인 무작위 배정 연구처럼, 대부분 연구 설계로만 드러난다. 사례를 모으는 방식 자체가 이 질문을 과소 대표한다.</p>
+  </article>
+
+  <article class="stage" id="s3">
+    <div class="stage-head"><span class="num">3</span><h3>교육AI 위험관리 프레임워크 고안</h3><span class="chip c-done">1.0·1.1 공개</span><span class="when">2026년 10월</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>위험 분류의 검증, NIST Core의 교육 확장과 행위자별 프로파일, 측정 수단 연결, 사례 역적용을 통한 타당성 점검, 연구판 종합, 공개판의 순서로 진행했다.</dd>
+      <dt>중간 결과</dt>
+      <dd><ul>
+        <li><b>위험 분류</b>: 교육 측 ED1~ED10, 기술 측 TE1~TE11(21범주)과 둘을 잇는 경로 P1~P5. 독립 재측정에서 조항 범주 κ .71 이상</li>
+        <li><b>Core 확장</b>: NIST의 72개 하위범주 전부에 교육 해설을 달았다. 교육에 필요한 하위범주 18개와 교육 신뢰성 특성 5개를 더했다.</li>
+        <li><b>프로파일 7종</b>: 국가·교육청, 학교, 교사, 공급자, 학습자·보호자, 조달·비조달 맥락(결과 상태 185항목)</li>
+        <li><b>측정 연결</b>: 지표, 체크리스트, 벤치마크, 진단 모델 등 측정 수단 474개를 연결했다.</li>
+        <li><b>역적용</b>: 기존 사례에 프레임워크를 거꾸로 대입해 '더 일찍 잡을 수 있었는가'를 판정했다. 교육AI 프레임워크는 56.8%, NIST 원문은 31.8%였고, 가정을 뺀 하한은 22.7%이다.</li>
+        <li><b>공개판 1.0</b>: 관리 항목 51개(거버넌스·맵·측정·관리 4영역), 요구 391개(기본 343·확장 26·검토 권고 22), 위험 상황 사례 100개</li>
+        <li><b>공개판 1.1</b>: 위험 상황 사례 35개(S-101~S-135)를 더해 모두 135개, 참고문헌 49건</li>
+      </ul></dd>
+      <dt>두 독자</dt>
+      <dd>사람이 읽는 문서와 AI 에이전트가 읽는 기계 판독 형식을 같은 원천에서 함께 만들고, 판본을 고정해 관리한다. 공개판 첫머리에는 AI 에이전트를 위한 읽기 안내가 있다.</dd>
+      <dt>현재 상태</dt>
+      <dd>학교 현장의 운영 검증 전 판이다. 개선 후보 20개가 근거 판정을 기다리고, NIST 대응 공백의 일부 합의와 고영향 관련 법률 검토가 남아 있다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> P2에 대응하는 요구를 넣었다. AI 없이 하는 수행을 따로 측정하라는 요구, 정답보다 힌트를 먼저 주도록 기본값을 정하라는 요구가 그 예이다. 다만 운영 중인 측정 수단이 없는 위험 범주가 13개 남았고, 정상 작동 위해를 재는 방법은 대부분 명세 단계이다.</p>
+  </article>
+
+  <article class="stage" id="s4">
+    <div class="stage-head"><span class="num">4</span><h3>프레임워크와 독립적인 위험 상황 사례 개발과 1차 검토</h3><span class="chip c-done">개발·1차 검토 완료</span><span class="when">2026년 10월</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>프레임워크와 별개로 진행한 두 갈래의 연구에서 사례가 만들어졌다. 한 갈래는 AI 아첨과 정서 의존, 인지 외주, 역량 착각 같은 발달 위험의 범주와 사례를 넓혔다. 다른 갈래는 이를 이어받아 교육 현장에서 AI를 쓰고 운영하는 장면의 위험 상황으로 다듬었다. 사례 작성 기준을 먼저 정해 두고, 차수마다 개정했다.</dd>
+      <dt>1차 검토</dt>
+      <dd>교육AI 분야 전문가인 연구 책임자가 직접 검토했다. 차수마다 사례를 읽고 수정, 추가, 보류를 정했고, 그 결정이 다음 차수의 개정으로 이어졌다. 여러 AI 모델의 교차 검토가 이를 보조했다. 연구자 밖의 독립 전문가 검토는 아직 없으며, 6단계의 현직 교사 검토가 첫 외부 검토이다.</dd>
+      <dt>중간 결과</dt>
+      <dd><ul>
+        <li>발달 위험: 위험 범주 후보 70개, 사례 기록 871건, 벤치마크 시제품</li>
+        <li>교육 현장 위험 진단: 위험 상황 105개, 관리 묶음 32개, 활성 사례 100개, 진단 규약 32개, 사전 시험 명세 20개</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>사례 개발과 1차 검토를 마쳤다. 진단의 단위는 AI의 사용과 운영이며, 학생 개인을 판정하는 데 쓰지 않는다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> 이 사례들은 의도대로 작동하는 시스템이 낳는 교육 위해를 많이 담고 있다. 중심 질문의 두 번째 형태를 가장 직접 다루는 자원이다.</p>
+  </article>
+
+  <article class="stage" id="s5">
+    <div class="stage-head"><span class="num">5</span><h3>사례를 프레임워크에 적용해 양쪽 개선</h3><span class="chip c-done">1회 완료</span><span class="when">2026년 10월</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>위험 상황 105개를 프레임워크로 판정하고(두 코더가 세 묶음으로 나누어 판정한 뒤 불일치를 조정), 결과를 양쪽으로 돌려보냈다. 사례 쪽에는 개선 제안을 보내고, 프레임워크 쪽에는 개선 후보를 만들어 근거를 찾았다.</dd>
+      <dt>중간 결과</dt>
+      <dd><ul>
+        <li>판정: 충분히 다룸 35개, 일부만 다룸 70개, 다루지 않음 0개. 일치도는 경로 κ .97, 포괄 정도 κ .87</li>
+        <li>프레임워크 개선 후보 6개: 결정권과 동의의 사람 확정, 확인 범위와 처리 상태의 표시, 생성·변환의 충실도와 귀속, 교사 설정과 도움 수준, 사람에게 가는 경로, 학급 단위·누적 교육 경험</li>
+        <li>후보 근거 탐색: 구성요소 32개 중 A등급 3개, B등급 11개, C등급 18개. A등급 3개는 모두 다른 분야의 규범이다.</li>
+        <li>사례 쪽 개선 제안 22개는 적용 4개, 부분 적용 9개, 보류 1개, 미적용 2개로 처리되었다.</li>
+        <li>프레임워크 공개판의 사례 100개는 이 위험 상황들을 일반화해 만들었다.</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>한 차례 순환을 마쳤다. 개선 후보는 근거 기준을 아직 충족하지 못해 채택하지 않았다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> '다루지 않음 0, 일부만 다룸 70'은 프레임워크가 범주로는 정상 작동 위해를 덮지만, 요구와 측정이 충분히 구체적이지 않다는 뜻이다. C등급 18개는 아직 규범이 없는 연구 의제이다.</p>
+  </article>
+
+  <article class="stage" id="s6">
+    <div class="stage-head"><span class="num">6</span><h3>프레임워크 틀로 사례를 종합하고 현직 교사에게 공개 검토</h3><span class="chip c-wait">준비 완료</span><span class="when">2026년 10~11월</span></div>
+    <dl class="grid">
+      <dt>과정</dt>
+      <dd>프레임워크 1.0의 사례 공백을 진단했다. 사례가 붙지 않은 관리 항목 6개가 있었고, 지식재산·환경 비용 범주와 교육 맥락의 증폭 경로, 학교 밖 AI 사용의 사례가 없었다. 이를 메울 사례 35개를 새로 만들어 1.1에 넣고, 교사 검토 체계를 설계했다. 작성과 검토를 여섯 차례 주고받으며 다듬었다.</dd>
+      <dt>검토 설계</dt>
+      <dd><ul>
+        <li>검토 대상 67개: 새 사례 35개와 기존 사례 묶음별 대표 32개</li>
+        <li>검토 질문: 현실성, 이해 가능성, 쟁점의 적절성, 공개 전 확인과 운영 중 확인의 실행 가능성</li>
+        <li><b>묶음 방식</b>: 사례를 12개 묶음으로 나누고 묶음마다 교사 4명이 검토한다. 모두 응답하면 사례-평정 268개가 모인다.</li>
+        <li><b>전체 보기 방식</b>: 67개 사례를 원인 경로(P1~P5)에 따라 한 화면에 배치하고, 교사가 사례를 골라 응답한다. 사례별 응답자 수만 보인다.</li>
+        <li>개인정보 최소화: 이름과 연락처를 받지 않는다. 응답은 1년 보관 후 파기하며, 그 안에 언제든 철회할 수 있다.</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>검토 체계를 만들고 사전 점검을 마쳤다. 현직 교사 검토를 시작할 준비가 되어 있다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> 교사 검토 대상 67개 중 P2는 10개이다. 교사 검토는 '정상 작동 위해'가 현장에서 실재하는 위험으로 읽히는지 처음 확인하는 자리이다.</p>
+  </article>
+
+  <article class="stage" id="s7">
+    <div class="stage-head"><span class="num">7</span><h3>교사 검토 결과로 사례와 프레임워크 개선</h3><span class="chip c-wait">분석 계획 확정</span></div>
+    <dl class="grid">
+      <dt>준비된 것</dt>
+      <dd><ul>
+        <li>분석 계획: 분석 전에 정한 제외 규칙, 중복·배경·철회 처리. 두 검토 방식은 따로 분석하고 합산하지 않는다.</li>
+        <li>분석 방법: 문항별 분포에서 '판단하기 어렵다', '해당 없음', 결측을 따로 다룬다. 일치도는 Krippendorff α(순서형)와 Gwet AC1(명목형)을 검토한다.</li>
+        <li>공개 원칙: 사례별 평정 수치는 공개하지 않는다. 전체 응답 분포와 사례별 편집 결정(유지·수정·보류) 및 그 이유를 공개한다.</li>
+        <li>총점, 위험 등급, 자동 채택 기준은 만들지 않는다.</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>검토 자료가 모이면 시작한다. 결과는 다음 판(1.2)의 사례 수정과 프레임워크 개선 후보 판정에 들어간다.</dd>
+    </dl>
+  </article>
+
+  <article class="stage" id="s8">
+    <div class="stage-head"><span class="num">8</span><h3>교육AI 위험 벤치마크 개발</h3><span class="chip c-none">자원 준비·통합 전</span></div>
+    <dl class="grid">
+      <dt>있는 자원</dt>
+      <dd><ul>
+        <li>프레임워크의 측정 연결 474개와 결과 상태 185항목(벤치마크 명세 14개 연결 포함)</li>
+        <li>발달 위험 연구의 벤치마크 시제품: 16개 유형의 한국어·영어 시험 32개, 경계 시험 41개</li>
+        <li>교육 현장 위험 진단의 사전 시험 명세 20개(실제 모델 시험은 하지 않음)</li>
+        <li>교육AI 안전 전략 연구의 벤치마크 명세 초안</li>
+      </ul></dd>
+      <dt>설계 원칙</dt>
+      <dd>제품 전체의 합격·불합격 기준이 아니라 기준별 진단에 쓴다. 학생 개인을 등급으로 분류하지 않으며, 합산 점수를 만들지 않는다.</dd>
+      <dt>현재 상태</dt>
+      <dd>자원이 여러 연구에 나뉘어 있고, 하나로 묶은 명세는 아직 없다.</dd>
+    </dl>
+    <p class="ag"><b>중심 질문과의 연결.</b> 기존 안전성 벤치마크는 대부분 한 번의 응답에서 결함이나 유해성을 찾는다. 정상 작동 위해는 여러 차례의 상호작용, 도움의 수준, AI 없이 한 수행과의 차이처럼 과정과 누적에서 드러나므로, 다른 시험 설계가 필요하다.</p>
+  </article>
+
+  <article class="stage" id="s9">
+    <div class="stage-head"><span class="num">9</span><h3>벤치마크로 교육AI 진단</h3><span class="chip c-none">시작 전</span></div>
+    <dl class="grid">
+      <dt>현재 상태</dt>
+      <dd>실제 모델과 서비스를 대상으로 한 진단은 아직 하지 않았다. 대상 선정, 접근 권한, 모델 판본 기록, 결과 공개 규칙을 먼저 정한다.</dd>
+    </dl>
+  </article>
+
+  <article class="stage" id="s10">
+    <div class="stage-head"><span class="num">10</span><h3>전체 사이클과 작은 사이클의 반복</h3><span class="chip c-part">작은 사이클 운용 중</span></div>
+    <dl class="grid">
+      <dt>이미 돈 순환</dt>
+      <dd><ul>
+        <li>판 단위: 연구판 1.0 → 공개판 1.0 → 1.1. 고정한 판은 덮어쓰지 않는다.</li>
+        <li>연구 사이: 프레임워크의 사례 판정 → 사례 쪽 선별 반영 → 그 대조 결과로 프레임워크 쪽 판정 정정</li>
+        <li>검토 순환: 사례 작성과 검토 여섯 차례, 공개판 독립 검토 두 차례</li>
+        <li>갱신 점검: 문헌은 30일, 진행 중인 사례는 14일 주기</li>
+      </ul></dd>
+      <dt>현재 상태</dt>
+      <dd>사람의 검증(교사 검토)과 벤치마크가 아직 순환에 들어오지 않아, 전체 사이클은 한 바퀴도 닫히지 않았다.</dd>
+    </dl>
+  </article>
+
+  <article class="stage" id="s11">
+    <div class="stage-head"><span class="num">11</span><h3>목표 결과물</h3><span class="chip c-part">1개 공개·2개 진행</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>결과물</th><th>지금 있는 것</th><th>남은 것</th></tr></thead>
+      <tbody>
+        <tr><td>교육AI 위험관리 프레임워크(사람 독자·AI 에이전트 독자)</td><td>공개판 1.1, AI 에이전트용 읽기 안내, 기계 판독 형식과 고정 판본</td><td>현장 검증, 개선 후보 판정, P2 측정 방법</td></tr>
+        <tr><td>위험 상황 사례와 현장에 연결된 개선 루프</td><td>사례 135개, 교사 검토의 두 방식, 분석 계획, 개인정보·철회 절차</td><td>검토 진행과 분석, 1.2 반영, 루프의 정례화</td></tr>
+        <tr><td>교육AI 위험 벤치마크</td><td>여러 연구에 나뉜 시험 자원</td><td>통합 명세, 시험 문항, 타당화, 실제 진단</td></tr>
+      </tbody>
+    </table></div>
+  </article>
+</section>
+
+<section aria-labelledby="plan-h">
+  <h2 id="plan-h">이후 계획</h2>
+  <p class="lede">순서는 단계 사이의 의존 관계를 따른다. 기간 대신 시작 조건과 완료 기준으로 적었다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>국면</th><th>할 일</th><th>완료 기준</th></tr></thead>
+    <tbody>
+      <tr><td><b>A. 현장 검토</b><br><span class="note">단계 6·7</span></td><td>현직 교사 검토를 진행한다. 응답이 적은 사례를 보강해 안내하고, 검토가 끝나면 정해 둔 분석 계획대로 분석해 사례별 편집 결정을 내린다.</td><td>사례별 유지·수정·보류와 그 이유, 전체 응답 분포</td></tr>
+      <tr><td><b>B. 1.2 개정</b><br><span class="note">단계 5·7</span></td><td>교사 검토 결과를 반영하고, 개선 후보의 근거를 판정한다. NIST 대응 공백의 합의와 고영향 관련 법률 검토를 마치고, 연결 자료의 최신판을 반영한다.</td><td>공개판 1.2와 변경 내역, 기계 판독 형식 갱신</td></tr>
+      <tr><td><b>C. P2 집중 탐색</b><br><span class="note">중심 질문·단계 2·4</span></td><td>사고 보고 밖의 근거(실험·종단 연구, 교사의 관찰, 서비스 설계 문서)에서 정상 작동 위해 사례를 넓힌다. 아첨·몰입 설계 사례를 프레임워크의 경로 코드에 대응시키고, P2 사례 묶음을 따로 둔다.</td><td>P2 사례와 근거 등급표, 사고 보고에 없는 위해 유형 목록</td></tr>
+      <tr><td><b>D. 벤치마크 통합 명세</b><br><span class="note">단계 8</span></td><td>흩어진 시험 자원을 프레임워크의 관리 항목과 결과 상태에 대응시킨다. 여러 차례의 상호작용 과제, AI 없이 한 수행과의 비교, 도움 수준 관찰 같은 P2용 시험 형식을 설계하고, 채점자 일치도와 타당화 계획을 세운다.</td><td>벤치마크 명세 1판(시험 문항, 관찰 규칙, 판본 기록, 결과 공개 규칙)</td></tr>
+      <tr><td><b>E. 시범 진단</b><br><span class="note">단계 9</span></td><td>접근할 수 있는 교육AI 몇 개에 시범 적용한다. 모델과 서비스의 판본을 기록하고, 결과는 기준별 진단으로만 보고한다.</td><td>시범 진단 보고, 벤치마크 수정 목록</td></tr>
+      <tr><td><b>F. 순환의 정례화</b><br><span class="note">단계 10</span></td><td>아래 두 사이클을 운영 규칙으로 고정한다.</td><td>사이클별 입력·출력·승인 지점</td></tr>
+    </tbody>
+  </table></div>
+  <figure class="fig" id="fig-cycle"><div class="fig-scroll"><svg viewBox="0 0 720 420" class="w-mid" role="img" aria-label="전체 사이클은 문헌·사례 갱신, RMF 개정판 고정, 사례 종합과 교사 검토, 사례와 RMF 개선, 벤치마크 개정, 교육AI 진단, 다음 판 환류의 일곱 정거장으로 돈다. 지금은 교사 검토 앞에 있고, 작은 사이클은 갱신 점검, 사례·프레임워크 대조, 묶음 보강, 문항 시험 정거장에서 따로 돈다."><defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-mk"/></marker><marker id="am3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-mkm"/></marker></defs><path d="M377.1,73.0 A140,140 0 0 1 458.0,112.0" class="d-e" marker-end="url(#ah3)"/><path d="M479.3,138.7 A140,140 0 0 1 499.3,226.3" class="d-e" marker-end="url(#ah3)"/><path d="M491.7,259.6 A140,140 0 0 1 435.7,329.8" class="d-e todo" marker-end="url(#am3)"/><path d="M404.9,344.6 A140,140 0 0 1 315.1,344.6" class="d-e todo" marker-end="url(#am3)"/><path d="M284.3,329.8 A140,140 0 0 1 228.3,259.6" class="d-e todo" marker-end="url(#am3)"/><path d="M220.7,226.3 A140,140 0 0 1 240.7,138.7" class="d-e todo" marker-end="url(#am3)"/><path d="M262.0,112.0 A140,140 0 0 1 342.9,73.0" class="d-e todo" marker-end="url(#am3)"/><circle cx="360.0" cy="72.0" r="6" class="d-dot"/><text x="360.0" y="44.0" text-anchor="middle" class="d-t">1 문헌·사례 갱신</text><text x="360.0" y="63.0" text-anchor="middle" class="d-l d-ag2">↻ 갱신 점검 30일·14일</text><circle cx="469.5" cy="124.7" r="6" class="d-dot"/><text x="485.1" y="116.2" text-anchor="start" class="d-t">2 RMF 개정판 고정</text><text x="485.1" y="135.2" text-anchor="start" class="d-l d-ag2">↻ 사례·프레임워크 대조</text><circle cx="496.5" cy="243.2" r="8" class="d-dot-now"/><text x="516.0" y="251.6" text-anchor="start" class="d-t">3 사례 종합·교사 검토</text><text x="516.0" y="270.6" text-anchor="start" class="d-l d-ag2">↻ 사례 묶음 보강</text><circle cx="420.7" cy="338.1" r="6" class="d-dot-todo"/><text x="429.4" y="360.2" text-anchor="start" class="d-t">4 사례·RMF 개선</text><circle cx="299.3" cy="338.1" r="6" class="d-dot-todo"/><text x="290.6" y="360.2" text-anchor="end" class="d-t">5 벤치마크 개정</text><text x="290.6" y="379.2" text-anchor="end" class="d-l d-ag2">↻ 문항 시험·수정</text><circle cx="223.5" cy="243.2" r="6" class="d-dot-todo"/><text x="204.0" y="251.6" text-anchor="end" class="d-t">6 교육AI 진단</text><circle cx="250.5" cy="124.7" r="6" class="d-dot-todo"/><text x="234.9" y="116.2" text-anchor="end" class="d-t">7 다음 판으로 환류</text><text x="360" y="204" text-anchor="middle" class="d-t">전체 사이클</text><text x="360" y="225" text-anchor="middle" class="d-l">아직 한 바퀴도 닫히지 않음</text><text x="360" y="245" text-anchor="middle" class="d-l d-acc">현재: 3번 앞</text></svg></div><figcaption>그림 3. 전체 사이클(판 단위)과 작은 사이클(↻, 묶음·주기 단위). 실선 구간은 1.0에서 1.1까지 실제로 돈 부분이고, 점선은 교사 검토 이후 닫을 구간이다. 작은 사이클은 전체 사이클을 기다리지 않고 해당 정거장에서 따로 돈다.</figcaption></figure>
+</section>
+
+<section aria-labelledby="open-h">
+  <h2 id="open-h">열린 과제</h2>
+  <ol class="plain">
+    <li><b>외부 전문가 검토.</b> 사례의 1차 검토는 연구 책임자의 검토이다. 교사 검토 외에 교육·발달·측정 분야 외부 전문가의 검토를 둘지 정한다.</li>
+    <li><b>현장 검증의 범위.</b> 교사 검토 외에 델파이 조사나 탁상 훈련을 둘지 정한다.</li>
+    <li><b>시범 진단의 대상과 결과 공개 범위.</b> 공급자와의 관계와 이해충돌 처리를 함께 정한다.</li>
+    <li><b>사람 검증의 위치.</b> 지금까지의 독립 검토와 일치도는 모두 AI 에이전트 사이의 검토이다. 사람 코더와 전문가 검토를 어느 단계에 둘지 정한다.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="rel-h" class="related">
+  <h2 id="rel-h">관련 결과물</h2>
+  <p><a href="https://climtc.github.io/projects/education-ai-rmf.html">교육AI 위험관리 프레임워크 1.1 읽기</a> · 이 프로젝트의 3·5단계 결과물이다.</p>
+  <p class="note">이 페이지의 수치는 2026년 11월 1일 기준이다. 일치도(κ)와 독립 검토는 모두 AI 에이전트 코더 사이의 값이며, 사람 검증은 이후 단계에서 진행한다.</p>
+</section>
+
+<footer class="page">문의: 임완철 · climtc@gnu.ac.kr</footer>
+</main>
+</body></html>
