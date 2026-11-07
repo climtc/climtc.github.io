@@ -27,7 +27,26 @@
 @media(max-width:700px){#map .case-grid{gap:14px}#map .case-card{padding:18px}#map .case-card[aria-pressed=true]{padding:18px}#research-overview{padding:16px}.intro-short{font-size:15px}}
 @media(max-width:420px){main{padding:12px}#map .case-grid{grid-template-columns:1fr}}
 
-</style></head><body><main><header><div class="eyebrow">교육AI 위험 상황 사례 검토 · 1.2</div><h1 id="heading"></h1><p>사례는 교육 전문가가 선정한 가정 상황이며 실제 사건이 아닙니다. 교사·학교용 기본 정보를 읽고 의견을 남기는 자료입니다.</p><p id="recruitment-target">이 검토는 현직 교사(초·중·고·특수)를 대상으로 합니다.</p><div id="pending-banner" class="hidden" aria-hidden="true"></div></header>
+
+.eair-h{position:sticky;top:0;z-index:60;background:var(--eh-bg,#fff);border-bottom:1px solid var(--eh-line,#dddcd5);
+  font:14px/1.4 "Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;word-break:keep-all}
+.eair-h *{box-sizing:border-box}
+.eair-in{max-width:1240px;margin:0 auto;padding:7px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap}
+.eair-brand{font-weight:700;color:var(--eh-ink,#1c1f24);text-decoration:none;white-space:nowrap}
+.eair-brand:hover{color:var(--eh-accent,#1d5a86)}
+.eair-proj{color:var(--eh-muted,#6c7079);font-size:12.5px;white-space:nowrap;padding-left:14px;border-left:1px solid var(--eh-line,#dddcd5)}
+.eair-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.eair-tabs::-webkit-scrollbar{display:none}
+.eair-tabs a{padding:6px 10px;border-radius:7px;color:var(--eh-ink2,#4a4f57);text-decoration:none;white-space:nowrap}
+.eair-tabs a:hover{background:var(--eh-soft,#e6eef5);color:var(--eh-ink,#1c1f24)}
+.eair-tabs a[aria-current=page]{background:var(--eh-soft,#e6eef5);color:var(--eh-accent,#1d5a86);font-weight:700}
+.eair-tools{display:flex;gap:8px;align-items:center;margin-left:auto}
+@media (max-width:760px){.eair-proj{display:none}.eair-tabs{order:5;flex-basis:100%}}
+@media print{.eair-h{display:none}}
+
+.eair-h{--eh-bg:var(--paper);--eh-line:var(--line);--eh-ink:var(--ink);--eh-ink2:var(--ink);--eh-muted:var(--muted);--eh-soft:#e8f1f7;--eh-accent:var(--blue)}
+html{scroll-padding-top:60px}
+</style></head><body><header class="eair-h"><div class="eair-in"><a class="eair-brand" href="../index.html">임완철 연구 기록</a><span class="eair-proj">교육AI 위험 연구</span><nav class="eair-tabs" aria-label="교육AI 위험 연구 페이지"><a href="education-ai-risk-detection.html">연구 과제</a><a href="education-ai-rmf.html">프레임워크 1.2</a><a href="education-ai-rmf-case-atlas.html" aria-current="page">사례 검토</a><a href="education-ai-risk-survey.html">설문</a><a href="education-ai-risk-ideas.html">문제 제안</a></nav></div></header><main><header><div class="eyebrow">교육AI 위험 상황 사례 검토 · 1.2</div><h1 id="heading"></h1><p>사례는 교육 전문가가 선정한 가정 상황이며 실제 사건이 아닙니다. 교사·학교용 기본 정보를 읽고 의견을 남기는 자료입니다.</p><p id="recruitment-target">이 검토는 현직 교사(초·중·고·특수)를 대상으로 합니다.</p><div id="pending-banner" class="hidden" aria-hidden="true"></div></header>
 <section class="box" id="research-overview"><h2>연구 소개</h2><p class="intro-short">교육AI 위험 상황을 살펴봅니다.<br>교사 의견으로 사례를 보완합니다.</p><p id="lead-researcher"><strong>대표연구자</strong><br>임완철(국가인공지능전략위원회 교육인재분과위원, 경상국립대, <a href="mailto:climtc@gnu.ac.kr">climtc@gnu.ac.kr</a>)</p><details id="intro-more"><summary>연구 소개 더 보기</summary><p id="research-summary">이 연구는 학교의 AI 사용과 운영에서 생길 수 있는 교육적 문제를 위험 상황 사례로 정리하고, 참여자의 의견을 통해 사례의 현실성과 설명의 이해 가능성, 신호를 알아챌 수 있는지, 교사·학교의 대응과 확인 방법이 실행 가능한지를 살펴봅니다. AI가 기술적으로 정상 작동하는 경우에도 학습과 참여, 관계와 권리에서 문제가 생길 수 있다는 점을 포함합니다. 검토 결과는 교육AI 위험관리 프레임워크의 사례와 점검 방법을 보완하는 데 활용합니다.</p></details><p><a href="#survey-questions">설문 문항 전체 보기</a> · <a href="#atlas-tools">사례 골라 보기</a></p></section>
 <section class="box"><details><summary>참여·개인정보 안내</summary><div id="notice"></div></details><p class="muted">기술 명세는 필수 읽기 자료가 아닙니다. 필요한 경우 사례 아래 링크에서 따로 볼 수 있습니다.</p></section>
 <section id="bundle-tools" class="box hidden"><label for="block">안내받은 묶음</label><select id="block"></select><p class="note">참여 코드는 설문에서 입력합니다. 코드의 형식만으로 참여 자격을 인증하지 않습니다.</p></section>

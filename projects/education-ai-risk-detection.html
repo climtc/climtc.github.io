@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>교육AI 위험 탐지 방법 · 임완철 연구 기록</title>
+<title>연구 과제 · 교육AI 위험 탐지 방법 · 임완철 연구 기록</title>
 <meta name="description" content="교육 분야에 들어온 AI가 학습자와 교사, 교육 관계에 일으킬 수 있는 위험을 미리 찾아내고 진단하는 방법을 만든다. 위험관리 프레임워크, 위험 상황 사례와 현직 교사 검토, 위험 벤치마크를 하나의 순환으로 잇는 진행 중 프로젝트.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%226%22%20fill%3D%22%231f5147%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2228%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2226%22%20fill%3D%22white%22%3E%EC%9E%84%3C%2Ftext%3E%3C%2Fsvg%3E">
 <style>
@@ -97,18 +97,56 @@ ol.plain,ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column
 footer.page{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:640px){.grid{grid-template-columns:1fr}.grid dt{padding-top:6px}.stage{padding:18px}h1{font-size:1.6rem}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.eair-h{position:sticky;top:0;z-index:60;background:var(--eh-bg,#fff);border-bottom:1px solid var(--eh-line,#dddcd5);
+  font:14px/1.4 "Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;word-break:keep-all}
+.eair-h *{box-sizing:border-box}
+.eair-in{max-width:1240px;margin:0 auto;padding:7px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap}
+.eair-brand{font-weight:700;color:var(--eh-ink,#1c1f24);text-decoration:none;white-space:nowrap}
+.eair-brand:hover{color:var(--eh-accent,#1d5a86)}
+.eair-proj{color:var(--eh-muted,#6c7079);font-size:12.5px;white-space:nowrap;padding-left:14px;border-left:1px solid var(--eh-line,#dddcd5)}
+.eair-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.eair-tabs::-webkit-scrollbar{display:none}
+.eair-tabs a{padding:6px 10px;border-radius:7px;color:var(--eh-ink2,#4a4f57);text-decoration:none;white-space:nowrap}
+.eair-tabs a:hover{background:var(--eh-soft,#e6eef5);color:var(--eh-ink,#1c1f24)}
+.eair-tabs a[aria-current=page]{background:var(--eh-soft,#e6eef5);color:var(--eh-accent,#1d5a86);font-weight:700}
+.eair-tools{display:flex;gap:8px;align-items:center;margin-left:auto}
+@media (max-width:760px){.eair-proj{display:none}.eair-tabs{order:5;flex-basis:100%}}
+@media print{.eair-h{display:none}}
+
+.eair-h{--eh-bg:var(--paper);--eh-line:var(--line);--eh-ink:var(--ink);--eh-ink2:var(--ink);--eh-muted:var(--muted);--eh-soft:color-mix(in srgb,var(--accent) 12%,transparent);--eh-accent:var(--accent)}
+html{scroll-padding-top:60px}
+.ask{margin:28px 0 8px}
+.ask-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.ask-grid a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--paper);color:var(--ink);text-decoration:none}
+.ask-grid a:hover{border-color:var(--accent)}
+.ask-grid b{display:block;font-size:1.02rem;margin:2px 0 4px}
+.ask-grid small{color:var(--muted);font-size:.8rem}
+.ask-grid span{display:block;font-size:.9rem;color:var(--muted);line-height:1.6}
+.ask .who{font-size:.9rem;color:var(--muted)}
 </style></head>
 <body>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
-<div class="topbar"><div class="in"><a class="brand" href="../index.html">임완철 연구 기록</a><a href="../index.html#projects">프로젝트 목록</a></div></div>
+<header class="eair-h"><div class="eair-in"><a class="eair-brand" href="../index.html">임완철 연구 기록</a><span class="eair-proj">교육AI 위험 연구</span><nav class="eair-tabs" aria-label="교육AI 위험 연구 페이지"><a href="education-ai-risk-detection.html" aria-current="page">연구 과제</a><a href="education-ai-rmf.html">프레임워크 1.2</a><a href="education-ai-rmf-case-atlas.html">사례 검토</a><a href="education-ai-risk-survey.html">설문</a><a href="education-ai-risk-ideas.html">문제 제안</a></nav></div></header>
 <main class="wrap" id="main">
 
 <header class="page">
-  <span class="eyebrow">진행 중 프로젝트 · 2026</span>
-  <h1>교육AI 위험 탐지 방법</h1>
+  <span class="eyebrow">진행 중 프로젝트 · 2026 · 원래 제목 「교육AI 위험 탐지 방법」</span>
+  <h1>연구 과제</h1>
   <p class="lede">교육 분야에 들어온 AI가 학습자와 교사, 교육 관계에 일으킬 수 있는 위험을 미리 찾아내고 진단하는 방법을 만든다. 위험관리 프레임워크, 위험 상황 사례와 현직 교사의 검토, 위험 벤치마크를 하나의 순환으로 잇는다. 이 페이지는 지금까지의 과정과 중간 결과, 현재 상태와 이후 계획을 열한 단계로 정리한 것이다.</p>
   <div class="meta"><span>연구 책임 임완철(경상국립대학교, 국가인공지능전략위원회 교육인재분과 위원)</span><span>시작 2026년 10월</span><span>최초 정리 2026-11-01 · 갱신 2026-11-06(진행 상태 기준일. 사례 수와 공개판 규모는 고정한 판 기준)</span></div>
 </header>
+
+<section class="ask" aria-labelledby="ask-h">
+  <h2 id="ask-h">선생님께 드리는 부탁</h2>
+  <p class="who">세 문서는 모두 AI와 함께 작성한 문서이고, 웹 페이지로 공개되어 있어요.</p>
+  <div class="ask-grid">
+    <a href="#track-h"><small>1 · 읽기</small><b>세 문서를 봐 주세요</b><span>이 연구 과제, 교육AI 위험관리 프레임워크 1.2, 위험 상황 사례 검토예요.</span></a>
+    <a href="education-ai-risk-survey.html"><small>2 · 설문</small><b>설문에 답해 주세요</b><span>문항이 많아서 시간 날 때 조금씩 답해도 돼요. 동료 선생님께 나누어 주셔도 좋아요.</span></a>
+    <a href="education-ai-risk-ideas.html"><small>3 · 문제 찾기</small><b>정상 작동해도 생기는 문제를 찾아 주세요</b><span>인공지능이 의도대로 작동해도 교육 측면에서 생길 문제를 적어 주세요.</span></a>
+  </div>
+  <p class="who">사례별 평정은 <a href="education-ai-rmf-case-atlas.html">사례 검토</a>, 프레임워크 본문은 <a href="education-ai-rmf.html">프레임워크 1.2</a>에서 볼 수 있어요.</p>
+</section>
 
 <section aria-labelledby="agenda-h">
   <h2 id="agenda-h">중심 질문</h2>
